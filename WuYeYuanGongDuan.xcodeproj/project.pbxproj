@@ -36,6 +36,8 @@
 		0497B37324A2DC2900E11796 /* TabBarControllerConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 0497B37024A2DC2900E11796 /* TabBarControllerConfig.m */; };
 		0497B37424A2DC2900E11796 /* PGGTabBarViewControllerConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 0497B37224A2DC2900E11796 /* PGGTabBarViewControllerConfig.m */; };
 		0497B37624A2DD9E00E11796 /* write_back_tabbar.png in Resources */ = {isa = PBXBuildFile; fileRef = 0497B37524A2DD9E00E11796 /* write_back_tabbar.png */; };
+		049BFFD3257CA6A20089A333 /* ZhiBoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 049BFFD2257CA6A20089A333 /* ZhiBoViewController.m */; };
+		049BFFD6257CACB50089A333 /* GenerateTestUserSig.m in Sources */ = {isa = PBXBuildFile; fileRef = 049BFFD4257CACB40089A333 /* GenerateTestUserSig.m */; };
 		04B93E7224A83C1E000AC76D /* WYCamaImageTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B93E7124A83C1E000AC76D /* WYCamaImageTools.m */; };
 		04CC3F6124A2FD2100524B34 /* WYTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CC3F6024A2FD2100524B34 /* WYTools.m */; };
 		04E51D2C24A2095E00A8491A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E51D2B24A2095E00A8491A /* AppDelegate.m */; };
@@ -113,6 +115,10 @@
 		0497B37124A2DC2900E11796 /* PGGTabBarViewControllerConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGGTabBarViewControllerConfig.h; sourceTree = "<group>"; };
 		0497B37224A2DC2900E11796 /* PGGTabBarViewControllerConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PGGTabBarViewControllerConfig.m; sourceTree = "<group>"; };
 		0497B37524A2DD9E00E11796 /* write_back_tabbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = write_back_tabbar.png; sourceTree = "<group>"; };
+		049BFFD1257CA6A20089A333 /* ZhiBoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZhiBoViewController.h; sourceTree = "<group>"; };
+		049BFFD2257CA6A20089A333 /* ZhiBoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZhiBoViewController.m; sourceTree = "<group>"; };
+		049BFFD4257CACB40089A333 /* GenerateTestUserSig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GenerateTestUserSig.m; sourceTree = "<group>"; };
+		049BFFD5257CACB50089A333 /* GenerateTestUserSig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GenerateTestUserSig.h; sourceTree = "<group>"; };
 		04B93E7024A83C1E000AC76D /* WYCamaImageTools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYCamaImageTools.h; sourceTree = "<group>"; };
 		04B93E7124A83C1E000AC76D /* WYCamaImageTools.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYCamaImageTools.m; sourceTree = "<group>"; };
 		04CC3F5F24A2FD2100524B34 /* WYTools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYTools.h; sourceTree = "<group>"; };
@@ -233,6 +239,7 @@
 		0497B34224A2D70100E11796 /* Sections */ = {
 			isa = PBXGroup;
 			children = (
+				049BFFD0257CA6810089A333 /* 直播 */,
 				0477E35924A9D5A00033822A /* 网页 */,
 			);
 			path = Sections;
@@ -326,6 +333,17 @@
 			children = (
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		049BFFD0257CA6810089A333 /* 直播 */ = {
+			isa = PBXGroup;
+			children = (
+				049BFFD1257CA6A20089A333 /* ZhiBoViewController.h */,
+				049BFFD2257CA6A20089A333 /* ZhiBoViewController.m */,
+				049BFFD5257CACB50089A333 /* GenerateTestUserSig.h */,
+				049BFFD4257CACB40089A333 /* GenerateTestUserSig.m */,
+			);
+			path = "直播";
 			sourceTree = "<group>";
 		};
 		04E51D1E24A2095E00A8491A = {
@@ -494,6 +512,7 @@
 				0497B36E24A2DBDF00E11796 /* RootTableViewController.m in Sources */,
 				0470856224AD616D00D6BCA7 /* UIScrollView+VTMagic.m in Sources */,
 				0470856324AD616D00D6BCA7 /* UIColor+VTMagic.m in Sources */,
+				049BFFD3257CA6A20089A333 /* ZhiBoViewController.m in Sources */,
 				0497B36424A2D91000E11796 /* UIView+Extension.m in Sources */,
 				04CC3F6124A2FD2100524B34 /* WYTools.m in Sources */,
 				0497B36724A2D91000E11796 /* UINavigationBar+FixMargin.m in Sources */,
@@ -525,6 +544,7 @@
 				0497B36824A2D91100E11796 /* UITabBar+badge.m in Sources */,
 				04E51D3D24A2096400A8491A /* main.m in Sources */,
 				0497B36324A2D91000E11796 /* UITextView+Placeholder.m in Sources */,
+				049BFFD6257CACB50089A333 /* GenerateTestUserSig.m in Sources */,
 				044408D824C195A70006F840 /* BDKNotifyHUD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

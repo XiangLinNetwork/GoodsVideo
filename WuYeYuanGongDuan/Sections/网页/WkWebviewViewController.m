@@ -8,8 +8,10 @@
 
 #import "WkWebviewViewController.h"
 #import <WebKit/WebKit.h>
+#import "ZhiBoViewController.h"
+#import <JavaScriptCore/JavaScriptCore.h>
 
-@interface WkWebviewViewController ()<WKNavigationDelegate>
+@interface WkWebviewViewController ()<WKNavigationDelegate,WKScriptMessageHandler>
 @property (nonatomic, strong) UIProgressView *progressView;
 @property (nonatomic, strong) WKWebView *webview;
 @end
@@ -20,37 +22,39 @@
 {
     [super viewWillDisappear:animated];
     [self.webview removeObserver:self forKeyPath:@"estimatedProgress"];
+    [self.navigationController setNavigationBarHidden:NO];
 }
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    WKWebViewConfiguration *config = [[WKWebViewConfiguration alloc] init];
+//    [config.userContentController addScriptMessageHandler:self name:@"app2vue_createLiveRoom"];///创建直播间
+//    [config.userContentController addScriptMessageHandler:self name:@"app2vue_getUserInfo"];///获取用户信息
+//    [config.userContentController addScriptMessageHandler:self name:@"app2vue_destroyLiveRoom"];///主播销毁直播间
+//    [config.userContentController addScriptMessageHandler:self name:@"app2vue_exitLiveRoom"];///观众退出直播间
     
-    WKWebView *webview = [[WKWebView alloc] init];
+    [config.userContentController addScriptMessageHandler:self name:@"vue2app_saveUserInfo"];
+    [config.userContentController addScriptMessageHandler:self name:@"vue2app_getUserInfo"];
+    [config.userContentController addScriptMessageHandler:self name:@"vue2app_cleanUserInfo"];
+    [config.userContentController addScriptMessageHandler:self name:@"vue2app_centerLiveRoom"];
+    [config.userContentController addScriptMessageHandler:self name:@"vue2app_createLiveRoom"];
+    
+    WKWebView *webview = [[WKWebView alloc] initWithFrame:CGRectZero configuration:config];
     [webview setNavigationDelegate:self];
     [self.view addSubview:webview];
     [webview mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.view);
+        make.top.equalTo(self.view).offset(kStatusBarHeight);
+        make.left.right.bottom.equalTo(self.view);
     }];
     _webview = webview;
     
-    if(_strurl.length>5)
-    {
-        
-        [webview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_strurl]]];
-    }
-    else
-    {
-        if(_strcontnt.length>5)
-        {
-            ///<header><meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no'><style>img{width:%f !important;height:auto}</style></header>
-            
-            ///<header><meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no' img='width:%f !important;height:auto'></header>
-            _strcontnt = [self htmlWebAutoImageSizeWidth:kMainScreenW-20 andvalue:_strcontnt];
-            NSString *headerString = [NSString stringWithFormat:@"<header><meta name='viewport' content='width=%lf, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no'></header>",kMainScreenW];
-            NSString *description_bigfont=[NSString stringWithFormat:@"%@<html>%@</html>",headerString,_strcontnt];
-            
-            [webview loadHTMLString:description_bigfont baseURL:nil];
-        }
-    }
+    [webview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://aimoer.1plus.store/"]]];
     
     //进度条初始化
     self.progressView = [[UIProgressView alloc] initWithFrame:CGRectMake(0, kTopHeight, [[UIScreen mainScreen] bounds].size.width, 2)];
@@ -59,6 +63,7 @@
     self.progressView.transform = CGAffineTransformMakeScale(1.0f, 1.5f);
     [self.view addSubview:self.progressView];
     [webview addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:nil];
+    
 }
 
 /**
@@ -166,6 +171,12 @@
 //    [webView evaluateJavaScript:meta completionHandler:^(id _Nullable value, NSError * _Nullable error) {
 //        
 //    }];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        NSString *startStr = @"app2vue_getUserInfo()";
+        [self.webview evaluateJavaScript:startStr completionHandler:^(id _Nullable response, NSError * _Nullable error) {
+            NSLog(@"value: %@ error: %@", response, error);
+        }];
+    });
 
 }
 
@@ -174,4 +185,20 @@
 {
     
 }
+
+#pragma mark - WKScriptMessageHandler
+- (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message
+{
+    NSLog(@"ccc=%@",message.name);
+    NSLog(@"ccc1=%@",message.body);
+    
+//    ///调用方法传递参数
+//    NSString *startStr = @"startUploadImgCB('start')";
+//    [self.webview evaluateJavaScript:startStr completionHandler:^(id _Nullable response, NSError * _Nullable error) {
+//        NSLog(@"value: %@ error: %@", response, error);
+//    }];
+    
+}
+
+
 @end

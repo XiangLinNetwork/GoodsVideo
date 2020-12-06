@@ -8,7 +8,8 @@
 
 #import "AppDelegate.h"
 #import "TabBarControllerConfig.h"
-
+#import "ZhiBoViewController.h"
+#import "WkWebviewViewController.h"
 @interface AppDelegate ()
 
 @end
@@ -34,13 +35,14 @@
 //    }
 //    else
 //    {
-//        LoginViewController *lvc = [[LoginViewController alloc] init];
+//        ZhiBoViewController *lvc = [[ZhiBoViewController alloc] init];
 //        UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:lvc];
 //        [self.window setRootViewController:nvc];
 //    }
     
-    
-    
+    WkWebviewViewController *lvc = [[WkWebviewViewController alloc] init];
+    UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:lvc];
+    [self.window setRootViewController:nvc];
     ///退出登录通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginOutNotifi) name:@"kNetworkWairningOnload" object:nil];
     
